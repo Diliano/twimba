@@ -18,11 +18,7 @@ function handleLikeClick(tweetId) {
         return tweet.uuid === tweetId
     });
 
-    if (targetTweetObj.isLiked) {
-        targetTweetObj.likes--;
-    } else {
-        targetTweetObj.likes++; 
-    }
+    targetTweetObj.isLiked ? targetTweetObj.likes-- : targetTweetObj.likes++;
 
     targetTweetObj.isLiked = !targetTweetObj.isLiked;
 
@@ -34,11 +30,7 @@ function handleRetweetClick(tweetId){
         return tweet.uuid === tweetId;
     });
     
-    if (targetTweetObj.isRetweeted) {
-        targetTweetObj.retweets--;
-    } else {
-        targetTweetObj.retweets++;
-    }
+    targetTweetObj.isRetweeted ? targetTweetObj.retweets-- : targetTweetObj.retweets++;
 
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
 
