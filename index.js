@@ -71,18 +71,23 @@ function getFeedHTML() {
         const likeIconClass = tweet.isLiked ? "liked" : "";
         
         const retweetIconClass = tweet.isRetweeted ? "retweeted" : "";
+
+        const {profilePic, handle, tweetText, uuid, replies, likes, retweets} = tweet;
         
         let repliesHTML = "";
         
         if (tweet.replies.length > 0) {
             tweet.replies.forEach(function(reply) {
-                repliesHTML+= `
+
+                const {profilePic, handle, tweetText} = reply;
+
+                repliesHTML += `
                     <div class="tweet-reply">
                         <div class="tweet-inner">
-                            <img src="${reply.profilePic}" class="profile-pic">
+                            <img src="${profilePic}" class="profile-pic">
                                 <div>
-                                    <p class="handle">${reply.handle}</p>
-                                    <p class="tweet-text">${reply.tweetText}</p>
+                                    <p class="handle">${handle}</p>
+                                    <p class="tweet-text">${tweetText}</p>
                                 </div>
                             </div>
                     </div>
@@ -94,33 +99,33 @@ function getFeedHTML() {
         feedHTML += `
             <div class="tweet">
                 <div class="tweet-inner">
-                    <img src="${tweet.profilePic}" class="profile-pic">
+                    <img src="${profilePic}" class="profile-pic">
                     <div>
-                        <p class="handle">${tweet.handle}</p>
-                        <p class="tweet-text">${tweet.tweetText}</p>
+                        <p class="handle">${handle}</p>
+                        <p class="tweet-text">${tweetText}</p>
                         <div class="tweet-details">
                             <span class="tweet-detail">
                                 <i class="fa-regular fa-comment-dots"
-                                data-reply="${tweet.uuid}"
+                                data-reply="${uuid}"
                                 ></i>
-                                ${tweet.replies.length}
+                                ${replies.length}
                             </span>
                             <span class="tweet-detail">
                                 <i class="fa-solid fa-heart ${likeIconClass}"
-                                data-like="${tweet.uuid}"
+                                data-like="${uuid}"
                                 ></i>
-                                ${tweet.likes}
+                                ${likes}
                             </span>
                             <span class="tweet-detail">
                                 <i class="fa-solid fa-retweet ${retweetIconClass}"
-                                data-retweet="${tweet.uuid}"
+                                data-retweet="${uuid}"
                                 ></i>
-                                ${tweet.retweets}
+                                ${retweets}
                             </span>
                         </div>   
                     </div>            
                 </div>
-                <div class="hidden" id="replies-${tweet.uuid}">
+                <div class="hidden" id="replies-${uuid}">
                     ${repliesHTML}
                 </div>   
             </div>
